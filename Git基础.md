@@ -91,4 +91,4 @@
 
 
 
-[image-1]:	git_lifecycle.tiff
+[image-1]:	../git_lifecycle.tiff
