@@ -6,6 +6,7 @@ GIT 学习从此处开始
 关键的是记住一个概念，在GIT本地的代码有三个区域，分为已提交(committed),已修改(modified)和已暂存(staged)
 
 # Git 如何查询帮助
+
 	$ git help <verb>
 	$ git <verb> --help 
 	$ man git-<verb>
