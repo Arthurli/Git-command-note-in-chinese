@@ -15,40 +15,53 @@ Git还有一个概念感觉就是其实不存在本质上的本地和远程的�
 	$ man git-<verb>
 	
 # Git基础
-## 本地创建git
-开始对某个项目使用git的时候使用,之后就会出现一个.git的文件，用来存储所有git相关的信息
+## 一次简单的git操作
 
-	$ git init
-
-之后我们来进行第一次提交
-
-	$ git add *.c
+	$ git init // 在当前路径下初始化git库，生成.git文件
+	$ git add *.c // 使用add方法把文件的修改移动到暂存区 
 	$ git add README
-	$ git commit -m "First commit"
-
-## 从服务器下载git
-我们可以从服务器下载git程序
-
-	$ git clone git://github.com/schacon/grit.git
+	$ git commit -m "First commit" // 把暂存取得得修改提交
+	
+	$ git clone git://github.com/schacon/grit.git // 从服务器克隆git,会在当前路径生成文件夹grit,当然也可以在最后加上文件夹名，则生成对应的文件夹保存git
+	$ git clone git://github.com/schacon/grit.git GitCode
+	 /**
+	  *git clone 支持多种传输协议，例如ssh,git,https... 当然也支持本地克隆
+	  */
 
 ## 我们来查看git状态
 
-	$ git status
+在这里再说说git的文件状态，如下图所示，文件又多出了两个状态，未被跟踪和未修改，其中未被跟踪的意思就是git不会记录该文件的修改
+在这里再说下 `git add` 命令，在没有跟踪的事后这个命令会跟踪该文件或者该目录，否则会把该文件的修改放置到暂存区 
+ 
+	 $ git status  // 查看当前文件的修改状态
 
 ![](IMG/git_lifecycle.tiff)
 
-## 让我们来跟踪一个文件
+## 让我们来忽略一些文件
+在根目录我们可以创建一个`.gitignore`的文件来设置忽略的文件  
+文件 .gitignore 的格式规范如下：
+> * 所有空行或者以注释符号 ＃ 开头的行都会被 Git 忽略。
+> * 可以使用标准的 glob 模式匹配。 
+> * 匹配模式最后跟反斜杠（/）说明要忽略的是目录。 
+> * 要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反。 
 
-	$ git add README
+那么什么是 glob 模式呢：[百度百科](http://baike.baidu.com/view/4019153.htm) 
+看个例子就什么都知道了
 
-## 查看已暂存和未暂存的更新
-此命令比较的是工作目录中当前文件和暂存区域快照之间的差异
+>  # 此为注释 – 将被 Git 忽略  
+>  *.a       # 忽略所有 .a 结尾的文件  
+>  !lib.a    # 但 lib.a 除外  
+>  /TODO     # 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO  
+>  build/    # 忽略 build/ 目录下的所有文件  
+>  doc/*.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
+ 
+## 查看文件差异
+此命令比较的是本地暂存文件修改,commits,分支等不同情况下文件的差异
 
-	$ git diff
+	$ git diff //查看修改文件和原始文件的差别
+	$ git diff --cached //已经暂存起来的文件和上次提交时的快照之间的差异
 
-若要看已经暂存起来的文件和上次提交时的快照之间的差异
-
-	$ git diff --cached
+	
 
 ## 提交
 	$ git commit //进入vi填写comiit信息
